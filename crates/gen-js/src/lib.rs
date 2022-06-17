@@ -1460,7 +1460,7 @@ impl Bindgen for FunctionBindgen<'_> {
                     expr.push_str(&name);
                     results.push(name);
                 }
-                self.src.js(&format!("{} }} = {};\n", expr, operands[0]));
+                self.src.js(&format!("{expr} }} = ({op} === null || {op} === undefined) ? {{}} : {op};\n", op = operands[0]));
             }
 
             Instruction::RecordLift { record, .. } => {
